@@ -1,0 +1,12 @@
+{
+    "ID": "e4a91f4c2be9434e8f76982cb3a4c1df",
+    "ActionKeyword": "symb",
+    "Name": "Symbols",
+    "Description": "Copy useful symbols for your notes",
+    "Author": "Benjosss",
+    "Version": "0.0.1",
+    "Language": "python",
+    "Website": "https://github.com/Benjosss/Symbols",
+    "IcoPath": "assets\\app.png",
+    "ExecuteFileName": "main.py"
+}
