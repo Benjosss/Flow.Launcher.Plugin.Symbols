@@ -11,42 +11,42 @@ class SymbolData:
 
 
 class Main(FlowLauncher):
-    # Dictionnaire de symboles avec leurs mots-clés
+    # Dictionnary
     SYMBOLS = [
-        SymbolData(["dot", "bullet", "point"], "•", "Puce"),
-        SymbolData(["arrow", "right"], "→", "Flèche droite"),
-        SymbolData(["arrow", "left"], "←", "Flèche gauche"),
-        SymbolData(["arrow", "up"], "↑", "Flèche haut"),
-        SymbolData(["arrow", "down"], "↓", "Flèche bas"),
-        SymbolData(["check", "tick"], "✓", "Coche"),
-        SymbolData(["cross", "x"], "✗", "Croix"),
-        SymbolData(["star"], "★", "Étoile"),
-        SymbolData(["heart"], "♥", "Coeur"),
+        SymbolData(["dot", "bullet", "point"], "•", "Bullter"),
+        SymbolData(["arrow", "right"], "→", "Arrow right"),
+        SymbolData(["arrow", "left"], "←", "Arrow left"),
+        SymbolData(["arrow", "up"], "↑", "Arrow up"),
+        SymbolData(["arrow", "down"], "↓", "Arrow down"),
+        SymbolData(["check", "tick"], "✓", "Tick"),
+        SymbolData(["cross", "x"], "✗", "Cross"),
+        SymbolData(["star"], "★", "Star"),
+        SymbolData(["heart"], "♥", "Heart"),
         SymbolData(["copyright"], "©", "Copyright"),
         SymbolData(["trademark", "tm"], "™", "Trademark"),
         SymbolData(["registered", "r"], "®", "Registered"),
-        SymbolData(["degree"], "°", "Degré"),
+        SymbolData(["degree"], "°", "Degree"),
         SymbolData(["euro"], "€", "Euro"),
-        SymbolData(["pound"], "£", "Livre sterling"),
+        SymbolData(["pound"], "£", "Pound"),
         SymbolData(["yen"], "¥", "Yen"),
-        SymbolData(["infinity"], "∞", "Infini"),
+        SymbolData(["infinity"], "∞", "Infinity"),
         SymbolData(["pi"], "π", "Pi"),
-        SymbolData(["sum"], "∑", "Somme"),
+        SymbolData(["sum"], "∑", "Sum"),
         SymbolData(["delta"], "Δ", "Delta"),
         SymbolData(["alpha"], "α", "Alpha"),
         SymbolData(["beta"], "β", "Beta"),
         SymbolData(["gamma"], "γ", "Gamma"),
         SymbolData(["omega"], "ω", "Omega"),
-        SymbolData(["ellipsis", "dots"], "…", "Points de suspension"),
-        SymbolData(["dash", "mdash"], "—", "Tiret cadratin"),
-        SymbolData(["section"], "§", "Paragraphe"),
-        SymbolData(["not", "equal"], "≠", "Différent de"),
-        SymbolData(["approximately", "approx"], "≈", "Approximativement"),
-        SymbolData(["less", "equal"], "≤", "Inférieur ou égal"),
-        SymbolData(["greater", "equal"], "≥", "Supérieur ou égal"),
-        SymbolData(["plus", "minus"], "±", "Plus ou moins"),
-        SymbolData(["multiply"], "×", "Multiplier"),
-        SymbolData(["divide"], "÷", "Diviser"),
+        SymbolData(["ellipsis", "dots"], "…", "Dots"),
+        SymbolData(["dash", "mdash"], "—", "Dash"),
+        SymbolData(["section"], "§", "Section"),
+        SymbolData(["not", "equal"], "≠", "Not equals"),
+        SymbolData(["approximately", "approx"], "≈", "Approx"),
+        SymbolData(["less", "equal"], "≤", "Less equal"),
+        SymbolData(["greater", "equal"], "≥", "Greater equal"),
+        SymbolData(["plus", "minus"], "±", "PLus or minus"),
+        SymbolData(["multiply"], "×", "Multiply"),
+        SymbolData(["divide"], "÷", "Divide"),
     ]
 
     def searchSymbols(self, query: str) -> list:
@@ -54,11 +54,11 @@ class Main(FlowLauncher):
         results = []
         
         if not query:
-            # Si pas de requête, afficher tous les symboles
+            # No request -> all symbols
             for symbol_data in self.SYMBOLS:
                 results.append({
                     "Title": f"{symbol_data.symbol}  —  {symbol_data.description}",
-                    "SubTitle": f"Mots-clés: {', '.join(symbol_data.keywords)}",
+                    "SubTitle": f"Keywords: {', '.join(symbol_data.keywords)}",
                     "IcoPath": "assets/app.png",
                     "JsonRPCAction": {
                         "method": "copy_symbol",
@@ -66,13 +66,13 @@ class Main(FlowLauncher):
                     }
                 })
         else:
-            # Rechercher les symboles correspondants
+            # Search symbols
             for symbol_data in self.SYMBOLS:
-                # Vérifier si la requête correspond à un des mots-clés
+                # Check query
                 if any(query in keyword for keyword in symbol_data.keywords):
                     results.append({
                         "Title": f"{symbol_data.symbol}  —  {symbol_data.description}",
-                        "SubTitle": f"Appuyez sur Entrée pour copier '{symbol_data.symbol}'",
+                        "SubTitle": f"Press Enter to copy '{symbol_data.symbol}'",
                         "IcoPath": "assets/app.png",
                         "JsonRPCAction": {
                             "method": "copy_symbol",
@@ -82,8 +82,8 @@ class Main(FlowLauncher):
         
         if not results and query:
             results.append({
-                "Title": "Aucun symbole trouvé",
-                "SubTitle": f"Aucun résultat pour '{query}'",
+                "Title": "No symbol found",
+                "SubTitle": f"No result for '{query}'",
                 "IcoPath": "assets/app.png",
             })
         
@@ -98,15 +98,15 @@ class Main(FlowLauncher):
             pyperclip.copy(symbol)
             return {
                 "result": {
-                    "Title": f"Symbole '{symbol}' copié !",
-                    "SubTitle": "Le symbole a été copié dans le presse-papiers",
+                    "Title": f"Symbol '{symbol}' copied !",
+                    "SubTitle": "Symbol copied into clipboard",
                     "IcoPath": "assets/app.png",
                 }
             }
         except Exception as e:
             return {
                 "result": {
-                    "Title": "Erreur lors de la copie",
+                    "Title": "Error",
                     "SubTitle": str(e),
                     "IcoPath": "assets/app.png",
                 }
